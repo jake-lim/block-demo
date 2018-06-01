@@ -34,7 +34,7 @@ users_schema = UserSchema(many=True)
 
 
 # endpoint to create new user
-@app.route("/user", methods=["POST"])
+@app.route("/transaction", methods=["POST"])
 def add_user():
     username = request.json['username']
     email = request.json['email']
@@ -48,7 +48,7 @@ def add_user():
     return jsonpickle.encode(new_user)
 
 # endpoint to show all users
-@app.route("/user", methods=["GET"])
+@app.route("/transaction", methods=["GET"])
 def get_user():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
@@ -56,14 +56,14 @@ def get_user():
 
 
 # endpoint to get user detail by id
-@app.route("/user/<id>", methods=["GET"])
+@app.route("/transaction/<id>", methods=["GET"])
 def user_detail(id):
     user = User.query.get(id)
     return user_schema.jsonify(user)
 
 
 # endpoint to update user
-@app.route("/user/<id>", methods=["PUT"])
+@app.route("/transaction/<id>", methods=["PUT"])
 def user_update(id):
     user = User.query.get(id)
     username = request.json['username']
@@ -79,7 +79,7 @@ def user_update(id):
 
 
 # endpoint to delete user
-@app.route("/user/<id>", methods=["DELETE"])
+@app.route("/transaction/<id>", methods=["DELETE"])
 def user_delete(id):
     user = User.query.get(id)
     db.session.delete(user)
